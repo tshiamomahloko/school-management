@@ -1,8 +1,6 @@
 package SMS.schoolmanagementsystem.repositories;
 
-import SMS.schoolmanagementsystem.models.Course;
 import SMS.schoolmanagementsystem.models.Grade;
-import SMS.schoolmanagementsystem.models.StudentGrade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
