@@ -2,7 +2,6 @@ package SMS.schoolmanagementsystem.models;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
 
