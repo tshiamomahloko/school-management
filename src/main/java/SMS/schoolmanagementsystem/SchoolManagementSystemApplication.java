@@ -2,7 +2,6 @@ package SMS.schoolmanagementsystem;
 
 import SMS.schoolmanagementsystem.models.*;
 import SMS.schoolmanagementsystem.repositories.SchoolGroupRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +20,8 @@ public class SchoolManagementSystemApplication {
 		return args -> {
 			SchoolGroup allCourses = new SchoolGroup("Courses", "All courses offered");
 
+			allCourses = repository.save(allCourses);
+
 			SchoolComponent FoC = new SchoolGroup("Faculty of Commerce", "Law and Management");
 
 			SchoolComponent bComAcc = new SchoolGroup("BCom", "Accounting");
@@ -32,6 +33,8 @@ public class SchoolManagementSystemApplication {
 
 			allCourses.add(FoC);
 
+			System.out.println("\nALL COURSES\n");
+
 			repository.save(allCourses);
 
 			Student student = new Student("Lebo", "Nzimande", "YaQwaQwa", "yaqwaqwa@example.com", bComAcc);
@@ -40,6 +43,7 @@ public class SchoolManagementSystemApplication {
 
 			student.displayInfo();
 
+			System.out.println("\nSCHOOL COMPONENT\n");
 			undergraduateCourses.getSchoolComponentList();
 		};
 	}

@@ -1,9 +1,15 @@
 package SMS.schoolmanagementsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Getter
+@Setter
 public abstract class SchoolComponent {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "school_component_sequence")
@@ -11,7 +17,8 @@ public abstract class SchoolComponent {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "school_group_id")
     private SchoolComponent schoolGroup;
 

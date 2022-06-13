@@ -1,14 +1,10 @@
 package SMS.schoolmanagementsystem.models;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import SMS.schoolmanagementsystem.repositories.SchoolGroupRepository;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Getter
 @Setter
@@ -17,13 +13,9 @@ import java.util.Locale;
 @Entity(name = "SchoolGroup")
 public class SchoolGroup extends SchoolComponent {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private SchoolComponent schoolGroup;
-
+    @ElementCollection
     @OneToMany(mappedBy = "schoolGroup", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    List<SchoolComponent> groupComponents = new ArrayList<>();
+    private Set<SchoolComponent> groupComponents = new HashSet<>();
 
     private String groupName;
     private String groupDescription;
@@ -41,6 +33,7 @@ public class SchoolGroup extends SchoolComponent {
     @Override
     public void add(SchoolComponent schoolComponent) {
         groupComponents.add(schoolComponent);
+        schoolComponent.setSchoolGroup(this);
     }
 
     @Override
