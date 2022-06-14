@@ -1,10 +1,8 @@
 package SMS.schoolmanagementsystem.controllers;
 
 import SMS.schoolmanagementsystem.models.Module;
-import SMS.schoolmanagementsystem.repositories.ModuleRepository;
+import SMS.schoolmanagementsystem.services.ModuleService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,19 +10,14 @@ import java.util.List;
 @RestController
 public class ModuleController {
 
-    private final ModuleRepository moduleRepository;
+    private final ModuleService moduleService;
 
-    public ModuleController(ModuleRepository moduleRepository) {
-        this.moduleRepository = moduleRepository;
+    public ModuleController(ModuleService moduleService) {
+        this.moduleService = moduleService;
     }
 
     @GetMapping("/modules")
     List<Module> allModules() {
-        return moduleRepository.getModules();
-    }
-    
-    @GetMapping("/modules/course/{courseId}")
-    List<Module> allCourseModules(@PathVariable(required=true, name="courseId") int courseId) {
-        return moduleRepository.getCourseModules(courseId);
+        return moduleService.getAllModules();
     }
 }

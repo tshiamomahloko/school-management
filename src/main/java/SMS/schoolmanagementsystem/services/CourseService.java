@@ -22,15 +22,14 @@ public class CourseService {
     @Autowired
     private  CourseRepository courseRepository;
     @Autowired
-    private  ModuleRepository moduleRepository;
+    private  ModuleService moduleService;
 
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
     public List<Module> getCourseModules(int id) {
-        return moduleRepository
-                .findAll()
+        return moduleService.getAllModules()
                 .stream()
                 .filter(x -> x.getCourseID().getCourseId() == id)
                 .collect(Collectors.toList());
