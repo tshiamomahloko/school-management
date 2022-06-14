@@ -11,10 +11,5 @@ import java.util.List;
 
 @Repository
 public interface EnrolmentsRepository extends JpaRepository<Enrolment, Long> {
-    @Override
-    List<Enrolment> findAll();
-
-    List<Enrolment> findByModuleId(int id);
-
 
 }

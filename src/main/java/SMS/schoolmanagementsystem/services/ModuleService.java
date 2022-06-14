@@ -25,9 +25,6 @@ import java.util.stream.Collectors;
 @Transactional
 @Slf4j
 public class ModuleService {
-
-
-
     @Autowired
     private CourseRepository courseRepository;
 
