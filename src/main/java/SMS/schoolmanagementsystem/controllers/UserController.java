@@ -5,29 +5,28 @@ import SMS.schoolmanagementsystem.models.Users;
 import SMS.schoolmanagementsystem.repositories.UserTypeRepository;
 //import SMS.schoolmanagementsystem.repositories.UsersRepository;
 import SMS.schoolmanagementsystem.repositories.UsersRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import SMS.schoolmanagementsystem.services.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController @RequiredArgsConstructor @RequestMapping(path = "users")
 public class UserController {
 
-    private final UsersRepository usersRepository;
-    private final UserTypeRepository userTypeRepository;
+    @Autowired
+    private UserService service;
 
-    public UserController(UsersRepository usersRepository, UserTypeRepository userTypeRepository) {
-        this.usersRepository = usersRepository;
-        this.userTypeRepository = userTypeRepository;
+    @GetMapping("{userId}/get-user-info")
+    public Users getUser(@PathVariable("userId") int id) {
+        return service.getUser(id);
     }
 
-    @GetMapping("/users-types")
-    List<UserType> getUserTypes() {
-        return userTypeRepository.getAllUserType();
-    }
-
-    @GetMapping("/users")
-    List<Users> getAllUsers() {
-        return usersRepository.getAllUsers();
+    @GetMapping("")
+    public List<Users> getAllUsers() {
+        return service.getAllUsers();
     }
 }
