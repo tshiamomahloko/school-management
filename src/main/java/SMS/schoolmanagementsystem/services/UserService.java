@@ -13,7 +13,10 @@ public class UserService {
     @Autowired
     private UsersRepository repository;
 
-    public Users addUser(Users newUser){
+    public Users addUser(Users newUser) throws IllegalAccessException {
+        if (repository.existsByEmailAddressIgnoreCase(newUser.getEmailAddress())) {
+            throw new IllegalAccessException(String.format("Email %s already exists", newUser.getEmailAddress()));
+        }
         return repository.save(newUser);
     }
 }

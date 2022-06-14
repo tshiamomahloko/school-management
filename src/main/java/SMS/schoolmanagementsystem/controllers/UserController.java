@@ -1,14 +1,9 @@
 package SMS.schoolmanagementsystem.controllers;
 
-//import SMS.schoolmanagementsystem.repositories.UsersRepository;
 import SMS.schoolmanagementsystem.models.Users;
 import SMS.schoolmanagementsystem.services.UserService;
-import com.sun.istack.NotNull;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-        import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -21,8 +16,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public void addUser(@RequestBody Users newUser){
-        System.out.println(newUser);
-        userService.addUser(newUser);
+    public Users addUser(@RequestBody Users newUser) throws IllegalAccessException {
+        return userService.addUser(newUser);
     }
 }

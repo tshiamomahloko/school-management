@@ -10,17 +10,10 @@ import javax.persistence.*;
 @Getter
 @ToString
 @Entity(name = "Users")
-@Table(
-        name = "Users",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "user_Id", columnNames = "UserID")
-        }
-)
 public class Users {
 
     @Id
-    @Gene
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserID")
     private int userId;
 
@@ -36,6 +29,5 @@ public class Users {
     @ManyToOne
     @JoinColumn(name = "UserTypeID")
     private  UserType userTypeId;
-
 }
 
