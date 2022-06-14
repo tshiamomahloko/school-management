@@ -10,4 +10,6 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Query(value = "select u from Users u")
     public List<Users> getAllUsers();
 
+    public Users findByUserId(int id);
+
 }
