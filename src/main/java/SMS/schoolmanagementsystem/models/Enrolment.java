@@ -6,20 +6,22 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Enrolment")
 @Getter
 @Setter
 public class Enrolment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "UserID")
-    private int userId;
+    @Column(name = "EnrolmentID")
+    private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "UserID")
+    private Users userId;
 
-    @Column(name = "ModuleID")
-    private int moduleId;
-
+    @ManyToOne
+    @JoinColumn(name = "ModuleID")
+    private Module moduleId;
 
     @Column(name = "Term")
     private String term;
