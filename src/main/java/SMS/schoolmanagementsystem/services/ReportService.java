@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 @Service
 public class ReportService {
 
-    GradeService gradeService = new GradeService();
-
     public StudentReportDto generateStudentReport(int userId, EnrolmentsRepository enrolmentRepository, GradesRepository gradesRepository) {
+
+        GradeService gradeService = new GradeService(gradesRepository);
 
         List<Enrolment> enrolledCourses = enrolmentRepository.getStudentCources(userId);
 

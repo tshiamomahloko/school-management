@@ -28,6 +28,7 @@ public class GradesController {
 
     private ReportService reportService = new ReportService();
 
+    @Autowired
     private GradeService gradeService;
 
     @GetMapping("/student/assessments")
