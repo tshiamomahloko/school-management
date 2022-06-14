@@ -1,13 +1,13 @@
 package SMS.schoolmanagementsystem.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Grade {
 
     @EmbeddedId
