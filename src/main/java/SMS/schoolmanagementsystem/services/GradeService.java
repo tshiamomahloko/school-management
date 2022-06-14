@@ -9,7 +9,7 @@ import java.util.List;
 public class GradeService {
 
     public static OverallStudentGrade getOverallGrade(List<Grade> studentGrades) {
-        System.out.println("reading from grade service");
+        
         String name = "";
         String surname = "";
         String email = "";
