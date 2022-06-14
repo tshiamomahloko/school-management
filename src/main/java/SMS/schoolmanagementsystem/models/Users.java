@@ -29,5 +29,6 @@ public class Users {
     @ManyToOne
     @JoinColumn(name = "UserTypeID")
     private  UserType userTypeId;
+
 }
 
