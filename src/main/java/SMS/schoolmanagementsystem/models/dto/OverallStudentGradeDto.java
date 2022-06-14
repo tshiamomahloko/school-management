@@ -1,13 +1,11 @@
-package SMS.schoolmanagementsystem.models;
+package SMS.schoolmanagementsystem.models.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-public class OverallStudentGrade {
+public class OverallStudentGradeDto {
 
 
     private String name;
@@ -16,7 +14,7 @@ public class OverallStudentGrade {
     private String moduleName;
     private float gradeObtained;
 
-    public OverallStudentGrade(String name, String surname, String email, String moduleName, float gradeObtained) {
+    public OverallStudentGradeDto(String name, String surname, String email, String moduleName, float gradeObtained) {
         this.name = name;
         this.surname = surname;
         this.email = email;

@@ -1,15 +1,16 @@
 package SMS.schoolmanagementsystem.services;
 
 import SMS.schoolmanagementsystem.models.Grade;
-import SMS.schoolmanagementsystem.models.OverallStudentGrade;
+import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GradeService {
 
-    public static OverallStudentGrade getOverallGrade(List<Grade> studentGrades) {
-        
+    public static OverallStudentGradeDto getOverallGrade(List<Grade> studentGrades) {
+
         String name = "";
         String surname = "";
         String email = "";
@@ -17,7 +18,7 @@ public class GradeService {
         float assessmentResult = 0;
         float finalGrade = 0;
         List<Float> assessmentResults = new ArrayList<Float>();
-        OverallStudentGrade moduleGrade = null;
+        OverallStudentGradeDto moduleGrade = null;
 
         for (Grade grade : studentGrades) {
 
@@ -38,7 +39,7 @@ public class GradeService {
             finalGrade = finalGrade + result;
         }
 
-        moduleGrade = new OverallStudentGrade(name, surname, email, moduleName, finalGrade);
+        moduleGrade = new OverallStudentGradeDto(name, surname, email, moduleName, finalGrade);
 
         return moduleGrade;
     }
