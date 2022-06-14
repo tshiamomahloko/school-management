@@ -6,7 +6,6 @@ import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
 import SMS.schoolmanagementsystem.models.dto.StudentReportDto;
 import SMS.schoolmanagementsystem.repositories.EnrolmentsRepository;
 import SMS.schoolmanagementsystem.repositories.GradesRepository;
-//import SMS.schoolmanagementsystem.repositories.ReportRepository;
 import SMS.schoolmanagementsystem.services.GradeService;
 import SMS.schoolmanagementsystem.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
