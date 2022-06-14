@@ -4,7 +4,7 @@ import SMS.schoolmanagementsystem.models.Enrolment;
 import SMS.schoolmanagementsystem.models.Module;
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
 import SMS.schoolmanagementsystem.models.dto.StudentReportDto;
-import SMS.schoolmanagementsystem.repositories.EnrolmentRepository;
+import SMS.schoolmanagementsystem.repositories.EnrolmentsRepository;
 import SMS.schoolmanagementsystem.repositories.GradesRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,9 @@ import java.util.stream.Collectors;
 @Service
 public class ReportService {
 
-    public StudentReportDto generateStudentReport(int userId, EnrolmentRepository enrolmentRepository, GradesRepository gradesRepository) {
+    GradeService gradeService = new GradeService();
+
+    public StudentReportDto generateStudentReport(int userId, EnrolmentsRepository enrolmentRepository, GradesRepository gradesRepository) {
 
         List<Enrolment> enrolledCourses = enrolmentRepository.getStudentCources(userId);
 
@@ -35,7 +37,7 @@ public class ReportService {
 
         for (Module module: modules) {
             HashMap<String, Float> moduleGrade = new HashMap<>();
-            OverallStudentGradeDto overallGrade = GradeService.getOverallGrade(gradesRepository.getStudentModuleGrade(userId, module.getModuleId()));
+            OverallStudentGradeDto overallGrade = gradeService.getOverallStudentGrade(gradesRepository.getStudentModuleGrade(userId, module.getModuleId()));
             moduleGrade.put(module.getModuleName(), overallGrade.getGradeObtained());
             courses.get(module.getCourseID().getCourseName()).add(moduleGrade);
         }

@@ -4,7 +4,7 @@ import SMS.schoolmanagementsystem.models.Grade;
 
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
 import SMS.schoolmanagementsystem.models.dto.StudentReportDto;
-import SMS.schoolmanagementsystem.repositories.EnrolmentRepository;
+import SMS.schoolmanagementsystem.repositories.EnrolmentsRepository;
 import SMS.schoolmanagementsystem.repositories.GradesRepository;
 //import SMS.schoolmanagementsystem.repositories.ReportRepository;
 import SMS.schoolmanagementsystem.services.GradeService;
@@ -20,12 +20,16 @@ import java.util.List;
 @RestController
 public class GradesController {
 
+    @Autowired
     private GradesRepository gradesRepository;
 
     @Autowired
-    private EnrolmentRepository enrolmentRepository;
+    private EnrolmentsRepository enrolmentsRepository;
 
     private ReportService reportService = new ReportService();
+
+    @Autowired
+    private GradeService gradeService;
 
     public GradesController(GradesRepository gradesRepository) {
         this.gradesRepository = gradesRepository;
@@ -41,19 +45,14 @@ public class GradesController {
         return gradesRepository.getStudentAssessmentGrade(userId, assessmentId);
     }
 
-    @GetMapping("/student/{userId}/module-grade/{moduleId}")
-    OverallStudentGradeDto getStudentModuleGrade(@PathVariable(required = true) int userId, @PathVariable(required = true) int moduleId) {
+    @GetMapping("/student/module-grade")
+    OverallStudentGradeDto getStudentModuleGrade(@RequestParam(required = true) int userId, @RequestParam(required = true) int moduleId) {
         List<Grade> response = gradesRepository.getStudentModuleGrade(userId, moduleId);
-        return GradeService.getOverallGrade(response);
+        return gradeService.getOverallStudentGrade(response);
     }
 
     @GetMapping("/student/{userId}/report")
     StudentReportDto getStudentReport(@PathVariable(required = true) int userId) {
-        return reportService.generateStudentReport(userId, enrolmentRepository, gradesRepository);
+        return reportService.generateStudentReport(userId, enrolmentsRepository, gradesRepository);
     }
-
-//    @GetMapping("/student/{userId}/modules")
-//    List<Enrolment> getEnrollment() {
-//        return reportRepository.getEnrollment();
-//    }
 }

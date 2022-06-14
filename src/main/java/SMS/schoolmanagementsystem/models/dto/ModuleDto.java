@@ -5,12 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class OverallStudentGradeDto {
+public class ModuleDto {
 
-    private String name;
-    private String surname;
-    private String email;
     private String moduleName;
-    private float gradeObtained;
+    private String moduleDescription;
+    private int courseID;
 
 }
