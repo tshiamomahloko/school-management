@@ -1,33 +1,26 @@
 package SMS.schoolmanagementsystem.controllers;
 
-import SMS.schoolmanagementsystem.models.UserType;
-import SMS.schoolmanagementsystem.models.Users;
-import SMS.schoolmanagementsystem.repositories.UserTypeRepository;
 //import SMS.schoolmanagementsystem.repositories.UsersRepository;
-import SMS.schoolmanagementsystem.repositories.UsersRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import SMS.schoolmanagementsystem.services.UserService;
+import com.sun.istack.NotNull;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+        import java.util.UUID;
 
 @RestController
+@RequestMapping(path = "/create-user")
 public class UserController {
+    private final UserService userService;
 
-    private final UsersRepository usersRepository;
-    private final UserTypeRepository userTypeRepository;
-
-    public UserController(UsersRepository usersRepository, UserTypeRepository userTypeRepository) {
-        this.usersRepository = usersRepository;
-        this.userTypeRepository = userTypeRepository;
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/users-types")
-    List<UserType> getUserTypes() {
-        return userTypeRepository.getAllUserType();
-    }
-
-    @GetMapping("/users")
-    List<Users> getAllUsers() {
-        return usersRepository.getAllUsers();
+    @PostMapping
+    public UUID createNewUser(@NotNull @RequestBody User user){
+        return userService.insertNewUser(user);
     }
 }
