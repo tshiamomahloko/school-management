@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,15 @@ public class EnrolmentsService {
         return enrolmentsRepository.findAll();
     }
 
+    public List<Enrolment> getEnrolmentsForModule(int moduleId){
+        List<Enrolment> moduleEnrolments = enrolmentsRepository
+                                            .findAll()
+                                            .stream()
+                                            .filter(enrolment -> enrolment.getModuleId().getModuleId() == moduleId)
+                                            .collect(Collectors.toList());
+        return moduleEnrolments;
+    }
+    
     public Enrolment createEnrolment(EnrolmentDto enrolmentDto) throws Exception {
         Optional<Users> user = usersRepository.findById(enrolmentDto.getUserId());
         if(!user.isPresent()){
