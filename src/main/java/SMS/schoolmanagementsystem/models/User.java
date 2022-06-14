@@ -1,22 +1,31 @@
 package SMS.schoolmanagementsystem.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Users")
+@Getter
+@Setter
 public class User {
 
     @Id
-    private Long id;
-    private String courseType;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Name")
     private String name;
-    private String surname; 
-    private String emailAddress;
-    private  int courseId;
 
-    public User() {}
+    @Column(name = "Surname")
+    private String surname;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "Email")
+    private String email;
+
+    @Column(name = "UserTypeID")
+    private int userTypeId;
+
 }
+
+
+
