@@ -1,46 +1,49 @@
 package SMS.schoolmanagementsystem.services;
 
+import SMS.schoolmanagementsystem.mappers.GradesToOverallStudentGrade;
 import SMS.schoolmanagementsystem.models.Grade;
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
+import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+@Service
 public class GradeService {
 
-    public static OverallStudentGradeDto getOverallGrade(List<Grade> studentGrades) {
 
-        String name = "";
-        String surname = "";
-        String email = "";
-        String moduleName = "";
-        float assessmentResult = 0;
-        float finalGrade = 0;
-        List<Float> assessmentResults = new ArrayList<Float>();
-        OverallStudentGradeDto moduleGrade = null;
+    private final GradesToOverallStudentGrade mapper = Mappers.getMapper(GradesToOverallStudentGrade.class);
 
-        for (Grade grade : studentGrades) {
-
-            name = grade.getGradeId().getEnrolmentId().getUserId().getName();
-            surname = grade.getGradeId().getEnrolmentId().getUserId().getSurname();
-            email = grade.getGradeId().getEnrolmentId().getUserId().getEmailAddress();
-            moduleName = grade.getGradeId().getEnrolmentId().getModuleId().getModuleName();
-            float assessmentWeight = grade.getGradeId().getAssessmentId().getAssessmentWeight();
-            float gradeObtained = grade.getGradeObtained();
-
-            assessmentResult = gradeObtained * (assessmentWeight / 100);
-            assessmentResults.add(assessmentResult);
+    public OverallStudentGradeDto getOverallStudentGrade(List<Grade> studentGrades){
+        if(studentGrades.isEmpty()){
+            return null;
         }
+        OverallStudentGradeDto overallStudentGradeDto = mapper.mapFromGrade(studentGrades.get(0));
+        List<Float> assessmentResultsFromStudentGrades = getAssessmentResultsFromStudentGrades(studentGrades);
+        Float finalGrade = calculateFinalGrade(assessmentResultsFromStudentGrades);
+        overallStudentGradeDto.setGradeObtained(finalGrade);
+        return overallStudentGradeDto;
 
-
-
-        for (float result : assessmentResults) {
-            finalGrade = finalGrade + result;
-        }
-
-        moduleGrade = new OverallStudentGradeDto(name, surname, email, moduleName, finalGrade);
-
-        return moduleGrade;
     }
+
+    private  List<Float> getAssessmentResultsFromStudentGrades(List<Grade> studentGrades){
+        return studentGrades
+                .stream()
+                .map(grade -> grade.getGradeObtained() * (grade.getGradeId().getAssessmentId().getAssessmentWeight() / 100f))
+                .collect(Collectors.toList());
+    }
+
+    private Float calculateFinalGrade(List<Float> assessmentResults){
+        return assessmentResults
+                .stream()
+                .reduce(0f, Float::sum);
+    }
+
+
+
+
 }

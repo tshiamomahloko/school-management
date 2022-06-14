@@ -5,6 +5,7 @@ import SMS.schoolmanagementsystem.models.Grade;
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
 import SMS.schoolmanagementsystem.repositories.GradesRepository;
 import SMS.schoolmanagementsystem.services.GradeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,11 @@ import java.util.List;
 @RestController
 public class GradesController {
 
+    @Autowired
     private GradesRepository gradesRepository;
+
+    @Autowired
+    private GradeService gradeService;
 
     public GradesController(GradesRepository gradesRepository) {
         this.gradesRepository = gradesRepository;
@@ -33,6 +38,6 @@ public class GradesController {
     @GetMapping("/student/module-grade")
     OverallStudentGradeDto getStudentModuleGrade(@RequestParam(required = true) int userId, @RequestParam(required = true) int moduleId) {
         List<Grade> response = gradesRepository.getStudentModuleGrade(userId, moduleId);
-        return GradeService.getOverallGrade(response);
+        return gradeService.getOverallStudentGrade(response);
     }
 }
