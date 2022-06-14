@@ -28,27 +28,21 @@ public class GradesController {
 
     private ReportService reportService = new ReportService();
 
-    @Autowired
     private GradeService gradeService;
-
-    public GradesController(GradesRepository gradesRepository) {
-        this.gradesRepository = gradesRepository;
-    }
 
     @GetMapping("/student/assessments")
     List<Grade> getStudentOverallGrades(@RequestParam(required = true) int userId) {
-        return gradesRepository.getAllStudentGrades(userId);
+        return gradeService.getStudentOverallGrades(userId);
     }
 
     @GetMapping("/student/assessment")
     List<Grade> getStudentAssessmentGrade(@RequestParam(required = true) int userId, @RequestParam(required = true) int assessmentId) {
-        return gradesRepository.getStudentAssessmentGrade(userId, assessmentId);
+        return gradeService.getStudentAssessmentGrade(userId, assessmentId);
     }
 
     @GetMapping("/student/module-grade")
     OverallStudentGradeDto getStudentModuleGrade(@RequestParam(required = true) int userId, @RequestParam(required = true) int moduleId) {
-        List<Grade> response = gradesRepository.getStudentModuleGrade(userId, moduleId);
-        return gradeService.getOverallStudentGrade(response);
+        return gradeService.getStudentModuleGrade(userId, moduleId);
     }
 
     @GetMapping("/student/{userId}/report")
