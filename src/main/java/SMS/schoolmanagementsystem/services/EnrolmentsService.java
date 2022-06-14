@@ -37,6 +37,10 @@ public class EnrolmentsService {
         return enrolmentsRepository.findAll();
     }
 
+    public List<Enrolment> getStudentCources(int userId) {
+        return enrolmentsRepository.getStudentCources(userId);
+    }
+
     public List<Enrolment> getEnrolmentsForModule(int moduleId){
         List<Enrolment> moduleEnrolments = enrolmentsRepository
                                             .findAll()
@@ -45,7 +49,7 @@ public class EnrolmentsService {
                                             .collect(Collectors.toList());
         return moduleEnrolments;
     }
-    
+
     public Enrolment createEnrolment(EnrolmentDto enrolmentDto) throws Exception {
         Optional<Users> user = usersRepository.findById(enrolmentDto.getUserId());
         if(!user.isPresent()){
@@ -64,5 +68,6 @@ public class EnrolmentsService {
 
         enrolmentsRepository.save(enrolment);
         return enrolment;
+
     }
 }

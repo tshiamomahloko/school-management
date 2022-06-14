@@ -11,5 +11,10 @@ import java.util.List;
 
 @Repository
 public interface EnrolmentsRepository extends JpaRepository<Enrolment, Long> {
+    @Override
+    List<Enrolment> findAll();
+
+    @Query(value = "SELECT * FROM Enrolment WHERE userId = ?1", nativeQuery = true)
+    public List<Enrolment> getStudentCources(int userId);
 
 }
