@@ -20,7 +20,7 @@ public class GradeService {
         OverallStudentGrade moduleGrade = null;
 
         for (Grade grade : studentGrades) {
-            
+
             name = grade.getGradeId().getEnrolmentId().getUserId().getName();
             surname = grade.getGradeId().getEnrolmentId().getUserId().getSurname();
             email = grade.getGradeId().getEnrolmentId().getUserId().getEmailAddress();
