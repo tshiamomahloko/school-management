@@ -1,6 +1,7 @@
 package SMS.schoolmanagementsystem.controllers;
 
 //import SMS.schoolmanagementsystem.repositories.UsersRepository;
+import SMS.schoolmanagementsystem.models.Users;
 import SMS.schoolmanagementsystem.services.UserService;
 import com.sun.istack.NotNull;
 import org.apache.catalina.User;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
         import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/create-user")
+@RequestMapping(path = "/users")
 public class UserController {
     private final UserService userService;
 
@@ -19,8 +20,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public UUID createNewUser(@NotNull @RequestBody User user){
-        return userService.insertNewUser(user);
+    @PostMapping("/create")
+    public void addUser(@RequestBody Users newUser){
+        System.out.println(newUser);
+        userService.addUser(newUser);
     }
 }
