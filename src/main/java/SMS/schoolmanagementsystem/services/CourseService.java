@@ -7,7 +7,6 @@ import SMS.schoolmanagementsystem.repositories.ModuleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -34,9 +33,5 @@ public class CourseService {
                 .stream()
                 .filter(x -> x.getCourseID().getCourseId() == id)
                 .collect(Collectors.toList());
-    }
-
-    public Course addCourse(Course newCourse) {
-        return courseRepository.save(newCourse);
     }
 }
