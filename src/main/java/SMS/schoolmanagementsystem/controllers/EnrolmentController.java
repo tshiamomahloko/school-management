@@ -7,10 +7,6 @@ import SMS.schoolmanagementsystem.services.EnrolmentsService;
 import SMS.schoolmanagementsystem.services.ModuleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
-
->>>>>>> ff2bd92427e256152321373e92c0181857827e7d
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

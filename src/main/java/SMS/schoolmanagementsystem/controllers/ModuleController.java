@@ -5,11 +5,7 @@ import SMS.schoolmanagementsystem.models.Users;
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
 import SMS.schoolmanagementsystem.models.dto.ModuleDto;
 import SMS.schoolmanagementsystem.services.ModuleService;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.CrossOrigin;
-=======
 import lombok.extern.slf4j.Slf4j;
->>>>>>> ff2bd92427e256152321373e92c0181857827e7d
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

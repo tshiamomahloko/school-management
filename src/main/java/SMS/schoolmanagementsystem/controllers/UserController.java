@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@RestController @RequiredArgsConstructor @Slf4j
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(path = "/users")
 public class UserController {
+
     @Autowired
     private final UserService userService;
 
@@ -35,7 +33,6 @@ public class UserController {
 
     @GetMapping("get-all-users")
     public ResponseEntity<?> getAllUsers(Principal principal) {
-        log.info(String.valueOf(principal));
         return ResponseEntity.ok(service.getAllUsers());
     }
 

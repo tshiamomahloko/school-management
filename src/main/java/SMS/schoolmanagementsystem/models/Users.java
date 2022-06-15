@@ -7,13 +7,9 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Setter
-<<<<<<< HEAD
-@ToString
-=======
 @Getter
 @ToString
 @Entity(name = "Users")
->>>>>>> ff2bd92427e256152321373e92c0181857827e7d
 public class Users {
 
     @Id
