@@ -1,8 +1,0 @@
-security:
-  oauth2:
-    client:
-      client-id: codercuy-client
-      client-secret: strong-secret
-      scope:
-        - read
-        - write
