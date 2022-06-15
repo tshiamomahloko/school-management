@@ -1,13 +1,16 @@
 package SMS.schoolmanagementsystem.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.text.MessageFormat;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Module {
 
     @Id

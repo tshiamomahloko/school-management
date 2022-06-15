@@ -2,6 +2,7 @@ package SMS.schoolmanagementsystem.services;
 
 import SMS.schoolmanagementsystem.models.Users;
 import SMS.schoolmanagementsystem.repositories.UsersRepository;
+<<<<<<< HEAD
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service @Transactional @RequiredArgsConstructor @Slf4j
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service @Transactional
+>>>>>>> ff2bd92427e256152321373e92c0181857827e7d
 public class UserService {
 
     @Autowired
     private UsersRepository repository;
 
+<<<<<<< HEAD
     public Users getUser(int id) {
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
@@ -62,4 +72,12 @@ public class UserService {
         }
         return user;
     }
+=======
+    public Users addUser(Users newUser) throws IllegalAccessException {
+        if (repository.existsByEmailAddressIgnoreCase(newUser.getEmailAddress())) {
+            throw new IllegalAccessException(String.format("Email %s already exists", newUser.getEmailAddress()));
+        }
+        return repository.save(newUser);
+    }
+>>>>>>> ff2bd92427e256152321373e92c0181857827e7d
 }

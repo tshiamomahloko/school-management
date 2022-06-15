@@ -2,11 +2,15 @@ package SMS.schoolmanagementsystem.controllers;
 
 import SMS.schoolmanagementsystem.models.Grade;
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
+import SMS.schoolmanagementsystem.models.dto.StudentReportDto;
+import SMS.schoolmanagementsystem.repositories.EnrolmentsRepository;
 import SMS.schoolmanagementsystem.repositories.GradesRepository;
 import SMS.schoolmanagementsystem.services.GradeService;
+import SMS.schoolmanagementsystem.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,25 +23,30 @@ public class GradesController {
     private GradesRepository gradesRepository;
 
     @Autowired
-    private GradeService gradeService;
+    private EnrolmentsRepository enrolmentsRepository;
 
-    public GradesController(GradesRepository gradesRepository) {
-        this.gradesRepository = gradesRepository;
-    }
+    private ReportService reportService = new ReportService();
+
+    @Autowired
+    private GradeService gradeService;
 
     @GetMapping("/student/assessments")
     List<Grade> getStudentOverallGrades(@RequestParam(required = true) int userId) {
-        return gradesRepository.getAllStudentGrades(userId);
+        return gradeService.getStudentOverallGrades(userId);
     }
 
     @GetMapping("/student/assessment")
     List<Grade> getStudentAssessmentGrade(@RequestParam(required = true) int userId, @RequestParam(required = true) int assessmentId) {
-        return gradesRepository.getStudentAssessmentGrade(userId, assessmentId);
+        return gradeService.getStudentAssessmentGrade(userId, assessmentId);
     }
 
     @GetMapping("/student/module-grade")
     OverallStudentGradeDto getStudentModuleGrade(@RequestParam(required = true) int userId, @RequestParam(required = true) int moduleId) {
-        List<Grade> response = gradesRepository.getStudentModuleGrade(userId, moduleId);
-        return gradeService.getOverallStudentGrade(response);
+        return gradeService.getStudentModuleGrade(userId, moduleId);
+    }
+
+    @GetMapping("/student/{userId}/report")
+    StudentReportDto getStudentReport(@PathVariable(required = true) int userId) {
+        return reportService.generateStudentReport(userId, enrolmentsRepository, gradesRepository);
     }
 }

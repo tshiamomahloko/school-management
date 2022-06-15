@@ -1,14 +1,27 @@
 package SMS.schoolmanagementsystem.controllers;
 
 import SMS.schoolmanagementsystem.models.Module;
+import SMS.schoolmanagementsystem.models.Users;
+import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
+import SMS.schoolmanagementsystem.models.dto.ModuleDto;
 import SMS.schoolmanagementsystem.services.ModuleService;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.CrossOrigin;
+=======
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> ff2bd92427e256152321373e92c0181857827e7d
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController @CrossOrigin(origins = "http://localhost:8080")
+
+@RestController
+@Slf4j
 public class ModuleController {
 
     private final ModuleService moduleService;
@@ -20,5 +33,24 @@ public class ModuleController {
     @GetMapping("/modules")
     List<Module> allModules() {
         return moduleService.getAllModules();
+    }
+
+    @GetMapping(value="/module/{moduleId}/students")
+    public List<Users> moduleStudents(@PathVariable int moduleId) {
+        return moduleService.getModuleStudents(moduleId);
+    }
+
+    @GetMapping("/module/{moduleId}/grades")
+    public List<OverallStudentGradeDto> getAllModuleGrades(@PathVariable int moduleId) {
+        return moduleService.getAllModuleGrades(moduleId);
+    }
+    
+    @PostMapping("/add-modules")
+    Module addModule(@RequestBody ModuleDto module) throws Exception {
+        try {
+            return moduleService.createModule(module);
+        } catch (Exception e) {
+            throw new Exception("could not add module");
+        }
     }
 }
