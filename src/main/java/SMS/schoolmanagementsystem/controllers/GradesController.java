@@ -1,6 +1,7 @@
 package SMS.schoolmanagementsystem.controllers;
 
 import SMS.schoolmanagementsystem.models.Grade;
+
 import SMS.schoolmanagementsystem.models.dto.OverallStudentGradeDto;
 import SMS.schoolmanagementsystem.models.dto.StudentReportDto;
 import SMS.schoolmanagementsystem.repositories.EnrolmentsRepository;
@@ -24,7 +25,7 @@ public class GradesController {
     @Autowired
     private EnrolmentsRepository enrolmentsRepository;
 
-    private final ReportService reportService = new ReportService();
+    private ReportService reportService = new ReportService();
 
     @Autowired
     private GradeService gradeService;

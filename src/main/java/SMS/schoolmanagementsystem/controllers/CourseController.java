@@ -3,8 +3,9 @@ package SMS.schoolmanagementsystem.controllers;
 import SMS.schoolmanagementsystem.models.Course;
 import SMS.schoolmanagementsystem.models.Module;
 import SMS.schoolmanagementsystem.services.CourseService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,15 +26,5 @@ public class CourseController {
     @GetMapping("/course/{courseId}/module")
     List<Module> allCourseModules(@PathVariable() int courseId) {
         return courseService.getCourseModules(courseId);
-    }
-
-    @PostMapping("/add-course")
-    public ResponseEntity<?> addCourse(@RequestBody Course newCourse) {
-        try {
-            Course course = courseService.addCourse(newCourse);
-            return ResponseEntity.accepted().body(course);
-        } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 }
