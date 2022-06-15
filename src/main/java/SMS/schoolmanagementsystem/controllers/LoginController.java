@@ -1,8 +1,6 @@
 package SMS.schoolmanagementsystem.controllers;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ResolvableType;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,18 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 
-@RestController @Slf4j
+@RestController
 public class LoginController {
 
     @Autowired
@@ -44,12 +39,12 @@ public class LoginController {
             ResponseEntity<?> response = restTemplate
                     .exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
             Map userAttributes = (Map) response.getBody();
-            log.info("Client:");
-            log.info(String.valueOf(userAttributes));
+//            log.info("Client:");
+//            log.info(String.valueOf(userAttributes));
             assert userAttributes != null;
             model.addAttribute("name", userAttributes.get("name"));
         }
-        log.info(String.valueOf(model));
+//        log.info(String.valueOf(model));
         return "loginSuccess";
     }
 }

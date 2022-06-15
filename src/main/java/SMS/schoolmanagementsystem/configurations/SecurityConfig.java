@@ -14,28 +14,9 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequ
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] WHITELIST = {
-            "/v2/api-docs",
-            "/v3/api-docs",
-            "/**/v3/api-docs",
-            "/swagger-resources",
-            "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
-            "/swagger-ui.html",
-            "**/swagger-ui.html",
-            "/**/swagger-ui.html**",
-            "/swagger-ui.html**",
-            "/webjars/**"
-    };
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
-                .authorizeRequests()
-                .antMatchers(WHITELIST)
-                .permitAll()
-                .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()

@@ -8,7 +8,6 @@ import SMS.schoolmanagementsystem.repositories.GradesRepository;
 import SMS.schoolmanagementsystem.services.GradeService;
 import SMS.schoolmanagementsystem.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController @CrossOrigin(origins = "http://localhost:8080")
+@RestController
 public class GradesController {
 
     @Autowired
@@ -25,7 +24,7 @@ public class GradesController {
     @Autowired
     private EnrolmentsRepository enrolmentsRepository;
 
-    private ReportService reportService = new ReportService();
+    private final ReportService reportService = new ReportService();
 
     @Autowired
     private GradeService gradeService;
