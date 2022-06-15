@@ -1,22 +1,16 @@
 package SMS.schoolmanagementsystem.controllers;
 
-import SMS.schoolmanagementsystem.models.UserType;
 import SMS.schoolmanagementsystem.models.Users;
-import SMS.schoolmanagementsystem.repositories.UserTypeRepository;
-//import SMS.schoolmanagementsystem.repositories.UsersRepository;
-import SMS.schoolmanagementsystem.repositories.UsersRepository;
 import SMS.schoolmanagementsystem.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
-@RestController @RequiredArgsConstructor @RequestMapping(path = "users") @Slf4j
+@RestController @RequiredArgsConstructor @Slf4j
 public class UserController {
 
     @Autowired
