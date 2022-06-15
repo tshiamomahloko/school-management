@@ -26,7 +26,7 @@ public class Users {
     @Column(name = "Email", nullable = false, columnDefinition = "TEXT")
     private String emailAddress;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "UserTypeID")
     private  UserType userTypeId;
 
